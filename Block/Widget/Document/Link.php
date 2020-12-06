@@ -48,30 +48,22 @@ class Link extends HtmlLink implements BlockInterface, IdentityInterface
         parent::__construct($context, $data);
     }
 
-    /**
-     * @inheritdoc
-     * @throws NoSuchEntityException
-     */
     public function getIdentities(): array
     {
         return $this->resolveDocument() instanceof IdentityInterface ? $this->resolveDocument()->getIdentities() : [];
     }
 
-    /**
-     * @inheritdoc
-     * @throws NoSuchEntityException
-     */
     protected function _beforeToHtml(): self
     {
         $document = $this->resolveDocument();
 
-        if (!$this->hasData('label')) {
+        if ($document && !$this->hasData('label')) {
             $this->setData('label', $document->getName());
         }
-        if (!$this->hasData('path')) {
+        if ($document && !$this->hasData('path')) {
             $this->setData('path', $this->urlViewModel->getFileUrl($document));
         }
-        if (!$this->hasData('title')) {
+        if ($document && !$this->hasData('title')) {
             $this->setData('title', $document->getName());
         }
         if (!$this->hasData('target')) {
@@ -92,14 +84,20 @@ class Link extends HtmlLink implements BlockInterface, IdentityInterface
         return parent::_beforeToHtml();
     }
 
-    /**
-     * @return DocumentInterface
-     * @throws NoSuchEntityException
-     */
-    private function resolveDocument(): DocumentInterface
+    protected function _toHtml(): string
+    {
+        return $this->resolveDocument() ? parent::_toHtml() : '';
+    }
+
+    private function resolveDocument(): ?DocumentInterface
     {
         if (!$this->hasData('document')) {
-            $this->setData('document', $this->documentRepository->getById((int) $this->getData('document_id')));
+            try {
+                $this->setData('document', $this->documentRepository->getById((int)$this->getData('document_id')));
+            } catch (NoSuchEntityException $e) {
+                $this->_logger->error($e->getLogMessage(), $e->getTrace());
+                $this->setData('document');
+            }
         }
 
         return $this->_getData('document');

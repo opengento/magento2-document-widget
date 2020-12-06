@@ -15,8 +15,8 @@ use Magento\Theme\Block\Html\Pager;
 use Magento\Widget\Block\BlockInterface;
 use Opengento\Document\Api\Data\DocumentTypeInterface;
 use Opengento\Document\Api\DocumentTypeRepositoryInterface;
-use Opengento\Document\Model\ResourceModel\Document\CollectionFactory;
 use Opengento\Document\Model\ResourceModel\Document\Collection;
+use Opengento\Document\Model\ResourceModel\Document\CollectionFactory;
 use Opengento\DocumentWidget\ViewModel\Document\Image as ImageViewModel;
 use Opengento\DocumentWidget\ViewModel\Document\Url as UrlViewModel;
 
@@ -57,10 +57,6 @@ class ListByType extends Template implements BlockInterface, IdentityInterface
         parent::__construct($context, $data);
     }
 
-    /**
-     * @return string[]
-     * @throws NoSuchEntityException
-     */
     public function getIdentities(): array
     {
         $documentType = $this->resolveDocumentType();
@@ -96,6 +92,11 @@ class ListByType extends Template implements BlockInterface, IdentityInterface
         return parent::_beforeToHtml();
     }
 
+    protected function _toHtml(): string
+    {
+        return $this->resolveDocumentType() ? parent::_toHtml() : '';
+    }
+
     private function createCollection(): Collection
     {
         /** @var Collection $collection */
@@ -106,12 +107,18 @@ class ListByType extends Template implements BlockInterface, IdentityInterface
         return $collection;
     }
 
-    /**
-     * @return DocumentTypeInterface
-     * @throws NoSuchEntityException
-     */
-    private function resolveDocumentType(): DocumentTypeInterface
+    private function resolveDocumentType(): ?DocumentTypeInterface
     {
-        return $this->docTypeRepository->getById((int) $this->getData('type_id'));
+
+        if (!$this->hasData('documentType')) {
+            try {
+                $this->setData('documentType', $this->docTypeRepository->getById((int) $this->getData('type_id')));
+            } catch (NoSuchEntityException $e) {
+                $this->_logger->error($e->getLogMessage(), $e->getTrace());
+                $this->setData('documentType');
+            }
+        }
+
+        return $this->_getData('documentType');
     }
 }
