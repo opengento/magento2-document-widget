@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<view xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Config/etc/view.xsd">
+    <media>
+        <images module="Opengento_Document">
+            <image id="document_page_grid" type="thumbnail">
+                <width>240</width>
+                <height>300</height>
+            </image>
+            <image id="document_page_list" type="thumbnail">
+                <width>200</width>
+                <height>250</height>
+            </image>
+            <image id="document_widget_grid" type="thumbnail">
+                <width>160</width>
+                <height>200</height>
+            </image>
+            <image id="document_widget_list" type="thumbnail">
+                <width>120</width>
+                <height>150</height>
+            </image>
+            <image id="document_widget_link" type="thumbnail">
+                <width>80</width>
+                <height>100</height>
+            </image>
+        </images>
+    </media>
+</view>

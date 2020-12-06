@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Opengento\Document\Model\ResourceModel\Document\Collection;
+use Opengento\DocumentWidget\ViewModel\Document\Url;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+
+/** @var Url $urlHelper */
+$urlHelper = $block->getData('urlHelper');
+
+/** @var Collection $collection */
+$collection = $block->getData('collection');
+
+$pagerHtml = $block->getChildBlock('pager')->setCollection($collection)->toHtml();
+
+$target = $block->getData('target') ? 'target="' . $block->getData('target') . '" rel="noopener noreferrer"' : '';
+?>
+<?php if ($collection->getSize()): ?>
+    <div class="block widget block-document-list list">
+        <div class="block-title">
+            <strong role="heading" aria-level="2"><?= $escaper->escapeHtml($block->getData('title')) ?></strong>
+        </div>
+        <div class="block-content">
+            <div class="documents-list list">
+                <ol class="documents-items documents-items-images">
+                    <?php foreach ($collection->getItems() as $document): ?>
+                        <li class="document-item">
+                            <strong class="document name document-item-name">
+                                <a class="document-item-link" href="<?= $escaper->escapeUrl($urlHelper->getFileUrl($document)) ?>" <?= $target ?>>
+                                    <?= $escaper->escapeHtml($document->getName()) ?>
+                                </a>
+                            </strong>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+                <?= $pagerHtml ?>
+            </div>
+        </div>
+    </div>
+<?php endif; ?>

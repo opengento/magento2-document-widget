@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+    <widget id="opengento_document_widget_document_type_list" class="Opengento\DocumentWidget\Block\Widget\Document\ListByType" is_email_compatible="true" placeholder_image="Opengento_DocumentWidget::images/widget/document_list.png">
+        <label>Document List by Type</label>
+        <description>List of documents filtered by type.</description>
+        <parameters>
+            <parameter name="title" xsi:type="text" required="true" visible="true" sort_order="10">
+                <label>Title</label>
+            </parameter>
+            <parameter name="type_id" xsi:type="select" source_model="Opengento\Document\Model\Config\Source\DocumentTypes" required="true" visible="true" sort_order="20">
+                <label>Document Type</label>
+            </parameter>
+            <parameter name="template" xsi:type="select" required="true" visible="true" sort_order="30">
+                <label>Template</label>
+                <options>
+                    <option name="image" value="Opengento_DocumentWidget::widget/document/list/image_list.phtml">
+                        <label>Document Image Only Template</label>
+                    </option>
+                    <option name="name" value="Opengento_DocumentWidget::widget/document/list/name_list.phtml">
+                        <label>Document Name Only Template</label>
+                    </option>
+                    <option name="image_and_name" value="Opengento_DocumentWidget::widget/document/list/default_list.phtml">
+                        <label>Document Image and Name Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+    <widget id="opengento_document_widget_document_link" class="Opengento\DocumentWidget\Block\Widget\Document\Link" is_email_compatible="true" placeholder_image="Opengento_DocumentWidget::images/widget/document_link.png">
+        <label>Document Link</label>
+        <description>Link to a document resource file.</description>
+        <parameters>
+            <parameter name="document_id" xsi:type="text" required="true" visible="true" sort_order="10">
+                <label>Resource Document</label>
+                <description>Please enter the document ID.</description>
+                <!-- Wait for new instructions from Magento, legacy chooser are deprecated. -->
+                <!--<block class="Opengento\DocumentWidget\Block\Adminhtml\Page\Widget\Chooser">
+                    <data>
+                        <item name="button" xsi:type="array">
+                            <item name="open" xsi:type="string">Select Document...</item>
+                        </item>
+                    </data>
+                </block>-->
+            </parameter>
+            <parameter name="label" xsi:type="text" visible="true" sort_order="20">
+                <label>Anchor Custom Text</label>
+                <description>If empty, the document name will be used.</description>
+            </parameter>
+            <parameter name="title" xsi:type="text" visible="true" sort_order="30">
+                <label>Anchor Custom Title</label>
+                <description>If empty, the document name will be used.</description>
+            </parameter>
+            <parameter name="template" xsi:type="select" required="true" visible="true" sort_order="50">
+                <label>Template</label>
+                <options>
+                    <option name="inline_name" value="Opengento_DocumentWidget::widget/document/link/link_inline.phtml">
+                        <label>Document Link Inline Template</label>
+                    </option>
+                    <option name="block_image" value="Opengento_DocumentWidget::widget/document/link/link_block_image.phtml">
+                        <label>Document Link Block Image Template</label>
+                    </option>
+                    <option name="block_name" value="Opengento_DocumentWidget::widget/document/link/link_block_name.phtml">
+                        <label>Document Link Block Name Template</label>
+                    </option>
+                    <option name="block_image_and_name" value="Opengento_DocumentWidget::widget/document/link/link_block.phtml">
+                        <label>Document Link Block Image and Name Template</label>
+                    </option>
+                </options>
+            </parameter>
+        </parameters>
+    </widget>
+</widgets>

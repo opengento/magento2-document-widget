@@ -1,0 +1,79 @@
+<?php
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Opengento\Document\Api\Data\DocumentInterface;
+use Opengento\Document\Model\ResourceModel\Document\Collection;
+use Opengento\DocumentWidget\ViewModel\Document\Image;
+use Opengento\DocumentWidget\ViewModel\Document\Toolbar\ViewMode;
+use Opengento\DocumentWidget\ViewModel\Document\Url;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+
+/** @var Url $urlHelper */
+$urlHelper = $block->getData('urlHelper');
+/** @var Image $imageHelper */
+$imageHelper = $block->getData('imageHelper');
+/** @var Collection $collection */
+$collection = $block->getData('collection');
+/** @var ViewMode $viewMode */
+$viewMode = $block->getData('viewMode');
+
+$target = $block->getData('target') ? 'target="' . $block->getData('target') . '" rel="noopener noreferrer"' : '';
+?>
+<?php if ($collection->getSize()): ?>
+    <?= $block->getChildBlock('toolbar')->setData('collection', $collection)->toHtml() ?>
+    <?= $block->getChildHtml('additional') ?>
+    <?php
+    if ($viewMode->getMode() === 'grid') {
+        $viewMode = 'grid';
+        $imageDisplayArea = 'document_page_grid';
+        $showDescription = false;
+    } else {
+        $viewMode = 'list';
+        $imageDisplayArea = 'document_page_list';
+        $showDescription = true;
+    }
+    ?>
+    <div class="documents wrapper <?= $viewMode ?> documents-<?= $viewMode ?> ">
+        <ol class="documents <?= $viewMode ?> items document-items">
+            <?php foreach ($collection->getItems() as $document):?>
+                <li class="item document document-item">
+                    <div class="document-item-info" id="document-item-info_<?= $document->getId() ?>" data-container="product-<?= $viewMode ?>">
+                        <a class="document photo document-item-photo" href="<?= $escaper->escapeUrl($urlHelper->getFileUrl($document)) ?>" <?= $target ?> tabindex="-1">
+                            <?= $block->getChildBlock('imageRenderer')->setData('image', $imageHelper->getImage($document, $imageDisplayArea))->toHtml() ?>
+                        </a>
+                        <div class="document details document-item-details">
+                            <strong class="document name document-item-name">
+                                <a class="document-item-link" href="<?= $escaper->escapeUrl($urlHelper->getFileUrl($document)) ?>" <?= $target ?>>
+                                    <?= $escaper->escapeHtml($document->getName()) ?>
+                                </a>
+                            </strong>
+                            <div class="product-item-inner">
+                                <?php if ($showDescription):?>
+                                    <div class="document description document-item-description">
+                                        <?= nl2br($escaper->escapeHtml($document->getDescription())) ?>
+                                        <a href="<?= $escaper->escapeUrl($urlHelper->getFileUrl($document)) ?>"
+                                           title="<?= $escaper->escapeHtmlAttr($document->getName()) ?>"
+                                           class="action more" <?= $target ?>><?= $escaper->escapeHtml(__('Learn More')) ?></a>
+                                    </div>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            <?php endforeach; ?>
+        </ol>
+    </div>
+    <?= $block->getChildBlock('toolbar')->setData('collection', $collection)->toHtml() ?>
+<?php else: ?>
+    <div class="message info empty">
+        <div><?= $escaper->escapeHtml(__('We can\'t find products matching the selection.')) ?></div>
+    </div>
+<?php endif; ?>

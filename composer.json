@@ -1,0 +1,28 @@
+{
+    "name": "opengento/module-document-widget",
+    "version": "1.0.0",
+    "description": "N/A",
+    "type": "magento2-module",
+    "require": {
+        "ext-dom": "*",
+        "magento/framework": "*",
+        "magento/module-widget": "*",
+        "opengento/module-document": "*"
+    },
+    "require-dev": {
+        "magento/magento-coding-standard": "^5",
+        "magento/marketplace-eqp": "^4.0",
+        "roave/security-advisories": "dev-master"
+    },
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Opengento\\DocumentWidget\\": ""
+        }
+    }
+}

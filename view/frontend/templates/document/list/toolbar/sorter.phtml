@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Opengento\DocumentWidget\ViewModel\Document\Toolbar\Sorter;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+
+/** @var Sorter $sorter */
+$sorter = $block->getData('sorter');
+?>
+<div class="toolbar-sorter sorter">
+    <label class="sorter-label" for="sorter"><?= $escaper->escapeHtml(__('Sort By')) ?></label>
+    <select id="sorter" data-role="sorter" class="sorter-options">
+        <?php foreach ($sorter->getAvailableOrders() as $code => $order) :?>
+            <option value="<?= $escaper->escapeHtmlAttr($code) ?>"
+                <?php if ($sorter->isActive($code)) :?>
+                    selected="selected"
+                <?php endif; ?>
+            >
+                <?= $escaper->escapeHtml(__($order)) ?>
+            </option>
+        <?php endforeach; ?>
+    </select>
+    <?php if ($sorter->getDirection() === 'desc') :?>
+        <a title="<?= $escaper->escapeHtmlAttr(__('Set Ascending Direction')) ?>"
+           href="#"
+           class="action sorter-action sort-desc"
+           data-role="direction-switcher"
+           data-value="asc">
+            <span><?= $escaper->escapeHtml(__('Set Ascending Direction')) ?></span>
+        </a>
+    <?php else :?>
+        <a title="<?= $escaper->escapeHtmlAttr(__('Set Descending Direction')) ?>"
+           href="#"
+           class="action sorter-action sort-asc"
+           data-role="direction-switcher"
+           data-value="desc">
+            <span><?= $escaper->escapeHtml(__('Set Descending Direction')) ?></span>
+        </a>
+    <?php endif; ?>
+</div>

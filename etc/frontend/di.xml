@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Opengento\DocumentWidget\Model\Document\Session\Storage" type="Magento\Framework\Session\Storage">
+        <arguments>
+            <argument name="namespace" xsi:type="const">Opengento\DocumentWidget\Model\Document\Session::NAMESPACE</argument>
+        </arguments>
+    </virtualType>
+    <type name="Opengento\DocumentWidget\Model\Document\Session">
+        <arguments>
+            <argument name="storage" xsi:type="object">Opengento\DocumentWidget\Model\Document\Session\Storage</argument>
+        </arguments>
+    </type>
+    <type name="Opengento\DocumentWidget\Model\Document\Toolbar\ViewMode">
+        <arguments>
+            <argument name="viewModes" xsi:type="array">
+                <item name="grid" xsi:type="string" translatable="true">Grid</item>
+                <item name="list" xsi:type="string" translatable="true">List</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Opengento\DocumentWidget\Model\Document\Toolbar\Sorter">
+        <arguments>
+            <argument name="orders" xsi:type="array">
+                <item name="entity_id" xsi:type="string" translatable="true">Relevance</item>
+                <item name="name" xsi:type="string" translatable="true">Name</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

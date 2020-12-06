@@ -1,0 +1,26 @@
+<?php
+/**
+ * Copyright © OpenGento, All rights reserved.
+ * See LICENSE bundled with this library for license details.
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Opengento\Document\Model\File\Image;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+
+/** @var Image $image */
+$image = $block->getData('image');
+?>
+<img class="photo image <?= $escaper->escapeHtmlAttr($block->getData('class')) ?>"
+    <?php foreach ($image->getAttributes() as $name => $value): ?>
+    <?= $escaper->escapeHtmlAttr($name) ?>="<?= $escaper->escapeHtmlAttr($value) ?>"
+    <?php endforeach; ?>
+    src="<?= $escaper->escapeUrl($image->getUrl()) ?>"
+    loading="lazy"
+    width="<?= $escaper->escapeHtmlAttr($image->getWidth()) ?>"
+    height="<?= $escaper->escapeHtmlAttr($image->getHeight()) ?>"
+    alt="<?= $escaper->escapeHtmlAttr($image->getLabel()) ?>" />
