@@ -20,14 +20,26 @@ final class SorterModifier implements CollectionModifierInterface
      */
     private $sorter;
 
+    /**
+     * @var string[]
+     */
+    private $mapper;
+
     public function __construct(
-        Sorter $sorter
+        Sorter $sorter,
+        array $mapper = []
     ) {
         $this->sorter = $sorter;
+        $this->mapper = $mapper;
     }
 
     public function apply(AbstractDb $collection): void
     {
-        $collection->setOrder($this->sorter->getOrder(), $this->sorter->getDirection());
+        $field = $this->sorter->getOrder();
+        if (isset($this->mapper[$field])) {
+            $collection->addFilterToMap($field, $this->mapper[$field]);
+        }
+
+        $collection->setOrder($field, $this->sorter->getDirection());
     }
 }

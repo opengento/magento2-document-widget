@@ -32,4 +32,13 @@
             </argument>
         </arguments>
     </type>
+    <type name="Opengento\DocumentWidget\Model\Document\Collection\CollectionModifier">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="select" xsi:type="object">Opengento\Document\Model\Document\Collection\SelectModifier</item>
+                <item name="sorter" xsi:type="object">Opengento\DocumentWidget\Model\Document\Collection\SorterModifier</item>
+                <item name="visibility" xsi:type="object">Opengento\Document\Model\Document\Collection\FrontendVisibilityModifier</item>
+            </argument>
+        </arguments>
+    </type>
 </config>

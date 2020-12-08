@@ -93,7 +93,7 @@ class Link extends HtmlLink implements BlockInterface, IdentityInterface
     {
         if (!$this->hasData('document')) {
             try {
-                $this->setData('document', $this->documentRepository->getById((int)$this->getData('document_id')));
+                $this->setData('document', $this->documentRepository->getById((int) $this->getData('document_id')));
             } catch (NoSuchEntityException $e) {
                 $this->_logger->error($e->getLogMessage(), $e->getTrace());
                 $this->setData('document');

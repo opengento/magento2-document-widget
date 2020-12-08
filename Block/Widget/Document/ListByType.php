@@ -7,6 +7,7 @@ declare(strict_types=1);
 
 namespace Opengento\DocumentWidget\Block\Widget\Document;
 
+use Magento\Framework\Data\CollectionModifierInterface;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\View\Element\Template;
@@ -42,18 +43,25 @@ class ListByType extends Template implements BlockInterface, IdentityInterface
      */
     private $imageViewModel;
 
+    /**
+     * @var CollectionModifierInterface
+     */
+    private $collectionModifier;
+
     public function __construct(
         Context $context,
         DocumentTypeRepositoryInterface $docTypeRepository,
         CollectionFactory $collectionFactory,
         UrlViewModel $urlViewModel,
         ImageViewModel $imageViewModel,
+        CollectionModifierInterface $collectionModifier,
         array $data = []
     ) {
         $this->docTypeRepository = $docTypeRepository;
         $this->collectionFactory = $collectionFactory;
         $this->urlViewModel = $urlViewModel;
         $this->imageViewModel = $imageViewModel;
+        $this->collectionModifier = $collectionModifier;
         parent::__construct($context, $data);
     }
 
@@ -102,7 +110,7 @@ class ListByType extends Template implements BlockInterface, IdentityInterface
         /** @var Collection $collection */
         $collection = $this->collectionFactory->create();
         $collection->addFieldToFilter('type_id', ['eq' => $this->getData('type_id')]);
-        $collection->addDefaultImage();
+        $this->collectionModifier->apply($collection);
 
         return $collection;
     }
