@@ -1,22 +1,54 @@
 {
     "name": "opengento/module-document-widget",
-    "version": "1.0.0",
-    "description": "N/A",
+    "description": "This module aims to help merchants to manage easily their documents on the Magento 2 storefront.",
+    "keywords": [
+        "php",
+        "magento",
+        "magento2",
+        "module",
+        "extension",
+        "document",
+        "widget"
+    ],
     "type": "magento2-module",
     "require": {
         "ext-dom": "*",
-        "magento/framework": "*",
-        "magento/module-widget": "*",
-        "opengento/module-document": "*"
+        "magento/framework": "^103.0",
+        "magento/module-widget": "^101.0",
+        "opengento/module-document": "^1.0"
     },
     "require-dev": {
         "magento/magento-coding-standard": "^5",
         "magento/marketplace-eqp": "^4.0",
         "roave/security-advisories": "dev-master"
     },
+    "suggest": {
+        "opengento/module-document-product-link": "",
+        "opengento/module-document-product-search": "",
+        "opengento/module-document-search": ""
+    },
     "license": [
         "MIT"
     ],
+    "homepage": "https://github.com/opengento/magento2-document-widget",
+    "authors": [
+        {
+            "name": "Opengento Team",
+            "email": "opengento@gmail.com",
+            "homepage": "https://opengento.fr/",
+            "role": "lead"
+        },
+        {
+            "name": "Thomas Klein",
+            "email": "thomaskein876@gmail.com",
+            "homepage": "https://www.linkedin.com/in/thomas-klein/",
+            "role": "maintainer"
+        }
+    ],
+    "support": {
+        "source": "https://github.com/opengento/magento2-document-widget",
+        "issues": "https://github.com/opengento/magento2-document-widget/issues"
+    },
     "autoload": {
         "files": [
             "registration.php"
