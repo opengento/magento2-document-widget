@@ -41,4 +41,11 @@
             </argument>
         </arguments>
     </type>
+    <virtualType name="Opengento\DocumentWidget\ViewModel\VisibleDocumentType" type="Opengento\DocumentWidget\ViewModel\DocumentType">
+        <arguments>
+            <argument name="visibilities" xsi:type="array">
+                <item name="public" xsi:type="const">Opengento\Document\Model\DocumentType\Visibility::VISIBILITY_PUBLIC</item>
+            </argument>
+        </arguments>
+    </virtualType>
 </config>
