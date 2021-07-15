@@ -9,7 +9,7 @@ namespace Opengento\DocumentWidget\ViewModel\Document;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Opengento\Document\Api\Data\DocumentInterface;
-use Opengento\Document\Model\Document\Helper\ImageBuilder;
+use Opengento\Document\Model\Document\Filesystem\ImageBuilder;
 use Opengento\Document\Model\File\Image as ImageData;
 
 final class Image implements ArgumentInterface
