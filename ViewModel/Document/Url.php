@@ -9,23 +9,23 @@ namespace Opengento\DocumentWidget\ViewModel\Document;
 
 use Magento\Framework\View\Element\Block\ArgumentInterface;
 use Opengento\Document\Api\Data\DocumentInterface;
-use Opengento\Document\Model\Document\Filesystem\Url as UrlBuilder;
+use Opengento\Document\Model\Document\Filesystem\UrlResolverInterface;
 
 final class Url implements ArgumentInterface
 {
     /**
-     * @var UrlBuilder
+     * @var UrlResolverInterface
      */
-    private $urlBuilder;
+    private $urlResolver;
 
     public function __construct(
-        UrlBuilder $urlBuilder
+        UrlResolverInterface $urlResolver
     ) {
-        $this->urlBuilder = $urlBuilder;
+        $this->urlResolver = $urlResolver;
     }
 
     public function getFileUrl(DocumentInterface $document): string
     {
-        return $this->urlBuilder->getFileUrl($document);
+        return $this->urlResolver->getFileUrl($document);
     }
 }

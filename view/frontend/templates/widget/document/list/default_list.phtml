@@ -40,7 +40,7 @@ $target = $block->getData('target') ? 'target="' . $block->getData('target') . '
                                 <?= $block->getChildBlock('imageRenderer')->setData('image', $imageHelper->getImage($document, 'document_widget_list'))->toHtml() ?>
                             </a>
                             <strong class="document name document-item-name">
-                                <a class="document-item-link" href="<?= $escaper->escapeUrl($urlHelper->getFileUrl($document)) ?>">
+                                <a class="document-item-link" href="<?= $escaper->escapeUrl($urlHelper->getFileUrl($document)) ?>" <?= $target ?>>
                                     <?= $escaper->escapeHtml($document->getName()) ?>
                                 </a>
                             </strong>
