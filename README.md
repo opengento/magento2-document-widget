@@ -41,17 +41,22 @@ bin/magento setup:upgrade
 
 ## Features
 
-This module aims to make documents searchable for customers in Magento 2.  
-Documents can be searchable if their visibility is set to `search`.
+This module aims to make documents available trhough the widgets in Magento 2.  
+Documents can be available as a list or a link thanks to new dedicated widgets.
 
 ## Documentation
 
-You can change the full search behavior by using the collection modifier extension point.  
-Add you own `Magento\Framework\Data\CollectionModifierInterface` implementation to the modifiers list of:
+You can use one of the two available widgets:
 
-`\Opengento\DocumentSearch\Model\Collection\CollectionModifier`
-
-Query parameters can be read through: `\Opengento\DocumentSearch\Model\QueryData`
+- link
+  - inline name
+  - block image
+  - block name
+  - block image + name
+- list by document type
+  - image
+  - name
+  - image + name
 
 ## Support
 
