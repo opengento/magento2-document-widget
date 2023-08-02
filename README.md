@@ -1,9 +1,9 @@
 # Document Module for Magento 2
 
-[![Latest Stable Version](https://img.shields.io/packagist/v/opengento/module-document-search.svg?style=flat-square)](https://packagist.org/packages/opengento/module-document-search)
-[![License: MIT](https://img.shields.io/github/license/opengento/magento2-document-search.svg?style=flat-square)](./LICENSE) 
-[![Packagist](https://img.shields.io/packagist/dt/opengento/module-document-search.svg?style=flat-square)](https://packagist.org/packages/opengento/module-document-search/stats)
-[![Packagist](https://img.shields.io/packagist/dm/opengento/module-document-search.svg?style=flat-square)](https://packagist.org/packages/opengento/module-document-search/stats)
+[![Latest Stable Version](https://img.shields.io/packagist/v/opengento/module-document-widget.svg?style=flat-square)](https://packagist.org/packages/opengento/module-document-widget)
+[![License: MIT](https://img.shields.io/github/license/opengento/magento2-document-widget.svg?style=flat-square)](./LICENSE) 
+[![Packagist](https://img.shields.io/packagist/dt/opengento/module-document-widget.svg?style=flat-square)](https://packagist.org/packages/opengento/module-document-widget/stats)
+[![Packagist](https://img.shields.io/packagist/dm/opengento/module-document-widget.svg?style=flat-square)](https://packagist.org/packages/opengento/module-document-widget/stats)
 
 This module aims to make documents searchable for customers in Magento 2.
 
@@ -26,7 +26,7 @@ Magento 2 Open Source or Commerce edition is required.
 Run the following composer command:
 
 ```
-composer require opengento/module-document-search
+composer require opengento/module-document-widget
 ```
 
 ### Setup the module
@@ -60,7 +60,7 @@ You can use one of the two available widgets:
 
 ## Support
 
-Raise a new [request](https://github.com/opengento/magento2-document-search/issues) to the issue tracker.
+Raise a new [request](https://github.com/opengento/magento2-document-widget/issues) to the issue tracker.
 
 ## Authors
 
